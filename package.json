@@ -1,0 +1,21 @@
+{
+  "name": "medicycle-workspace",
+  "version": "1.0.0",
+  "description": "MediCycle - Medicine Waste Reduction & Controlled Redistribution Web Prototype",
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "backend": "cd backend && npm start",
+    "frontend": "cd frontend && npm run dev",
+    "seed": "cd backend && npm run seed"
+  },
+  "keywords": [
+    "hackathon",
+    "healthcare",
+    "medicine-waste-reduction",
+    "react",
+    "express",
+    "mongodb"
+  ],
+  "author": "MediCycle Team",
+  "license": "ISC"
+}
