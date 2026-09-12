@@ -1,7 +1,15 @@
-// Use production backend URL if provided via VITE_API_BASE_URL (stripping any trailing slash),
-// otherwise fall back to '/api' for local Vite proxy development
-const rawBase = import.meta.env?.VITE_API_BASE_URL;
-const API_BASE = rawBase ? rawBase.replace(/\/+$/, '') : '/api';
+// Production Render backend fallback URL
+const PRODUCTION_BACKEND_API = 'https://medicycle-lz6y.onrender.com/api';
+
+// Intelligent API base resolution:
+// 1. If VITE_API_BASE_URL is provided in environment, sanitize and use it.
+// 2. If running in production (Vercel build), automatically use the live Render backend URL.
+// 3. If running in local development (`import.meta.env.DEV`), use '/api' to leverage Vite's local dev proxy.
+const rawEnvBase = (import.meta.env?.VITE_API_BASE_URL || '').trim().replace(/\/+$/, '');
+
+const API_BASE = rawEnvBase
+  ? (rawEnvBase.endsWith('/api') ? rawEnvBase : `${rawEnvBase}/api`)
+  : (import.meta.env?.PROD ? PRODUCTION_BACKEND_API : '/api');
 
 const getToken = () => localStorage.getItem('medicycle_token');
 
