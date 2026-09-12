@@ -1,4 +1,7 @@
-const API_BASE = '/api';
+// Use production backend URL if provided via VITE_API_BASE_URL (stripping any trailing slash),
+// otherwise fall back to '/api' for local Vite proxy development
+const rawBase = import.meta.env?.VITE_API_BASE_URL;
+const API_BASE = rawBase ? rawBase.replace(/\/+$/, '') : '/api';
 
 const getToken = () => localStorage.getItem('medicycle_token');
 
